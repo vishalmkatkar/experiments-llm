@@ -1,0 +1,55 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	setup(setup)
+	input_guard(input_guard)
+	router(router)
+	gate(gate)
+	refuse(refuse)
+	decline_scope(decline_scope)
+	direct_answer(direct_answer)
+	cache_lookup(cache_lookup)
+	rewrite_query(rewrite_query)
+	retrieve(retrieve)
+	grade_evidence(grade_evidence)
+	corrective_rewrite(corrective_rewrite)
+	not_found(not_found)
+	generate(generate)
+	verify(verify)
+	output_guard(output_guard)
+	finalize(finalize)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> setup;
+	cache_lookup -.-> output_guard;
+	cache_lookup -.-> rewrite_query;
+	corrective_rewrite --> retrieve;
+	decline_scope --> finalize;
+	direct_answer --> output_guard;
+	gate -.-> cache_lookup;
+	gate -.-> decline_scope;
+	gate -.-> direct_answer;
+	gate -.-> refuse;
+	generate --> verify;
+	grade_evidence -.-> corrective_rewrite;
+	grade_evidence -.-> generate;
+	grade_evidence -.-> not_found;
+	input_guard --> gate;
+	not_found --> finalize;
+	output_guard --> finalize;
+	refuse --> finalize;
+	retrieve --> grade_evidence;
+	rewrite_query --> retrieve;
+	router --> gate;
+	setup --> input_guard;
+	setup --> router;
+	verify -.-> finalize;
+	verify -.-> generate;
+	verify -.-> output_guard;
+	finalize --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

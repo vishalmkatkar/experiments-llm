@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond the Context Window</title>
+<meta name="description" content="Template-guided, section-wise extraction for messy vendor documents: splitting multi-document files, handling long documents, and building confidence through validation.">
+<meta property="og:title" content="Beyond the Context Window: Template-Guided, Section-Wise Extraction for Messy Vendor Documents">
+<meta property="og:description" content="A pipeline that splits multi-document files, extracts long documents section by section, and checks every result against the document's own totals.">
+<meta property="og:type" content="article">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1d1d1b;
+    --muted: #5f5e58;
+    --rule: #e4e1d8;
+    --accent: #2f5fd0;
+    --accent-tint: rgba(47, 95, 208, 0.10);
+    --code-bg: #f2f0ea;
+    --diagram-line: #b9b6ab;
+    --maxw: 700px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161614;
+      --surface: #1e1e1b;
+      --text: #ecebe6;
+      --muted: #a3a199;
+      --rule: #34332e;
+      --accent: #7ea2f5;
+      --accent-tint: rgba(126, 162, 245, 0.14);
+      --code-bg: #232320;
+      --diagram-line: #6c6a62;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161614;
+    --surface: #1e1e1b;
+    --text: #ecebe6;
+    --muted: #a3a199;
+    --rule: #34332e;
+    --accent: #7ea2f5;
+    --accent-tint: rgba(126, 162, 245, 0.14);
+    --code-bg: #232320;
+    --diagram-line: #6c6a62;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-size: 19px;
+    line-height: 1.65;
+  }
+  main { max-width: var(--maxw); margin: 0 auto; padding: 56px 16px 96px; }
+
+  header.post-head { margin-bottom: 40px; }
+  .kicker, h2, h3, th, .meta, figcaption, .toc, .verdict {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  }
+  .kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 12px; }
+  h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.15; margin: 0 0 16px; letter-spacing: -0.01em; }
+  .dek { font-size: 21px; color: var(--muted); margin: 0 0 20px; }
+  .meta { font-size: 14px; color: var(--muted); }
+
+  .toc { border: 1px solid var(--rule); background: var(--surface); border-radius: 10px; padding: 16px 20px; margin: 0 0 48px; font-size: 15px; }
+  .toc strong { display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .toc ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 28px; }
+  .toc li { break-inside: avoid; margin: 2px 0; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+  @media (max-width: 560px) { .toc ol { columns: 1; } }
+
+  h2 { font-size: 26px; line-height: 1.25; margin: 56px 0 12px; letter-spacing: -0.005em; scroll-margin-top: 16px; }
+  h3 { font-size: 19px; margin: 32px 0 8px; }
+  p { margin: 0 0 18px; }
+  ul, ol { padding-left: 24px; margin: 0 0 18px; }
+  li { margin: 6px 0; }
+  a { color: var(--accent); }
+  strong { font-weight: 650; }
+
+  .table-wrap { overflow-x: auto; margin: 8px 0 24px; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 15.5px; line-height: 1.45; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; background: var(--code-bg); }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 600; }
+
+  pre { background: var(--code-bg); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; overflow-x: auto; margin: 8px 0 24px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; line-height: 1.55; }
+  p code, li code, td code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-size: .85em; }
+
+  figure { margin: 24px -16px 28px; padding: 0; }
+  @media (min-width: 760px) { figure { margin-left: -40px; margin-right: -40px; } }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { font-size: 14px; color: var(--muted); text-align: center; margin-top: 8px; padding: 0 16px; }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--accent-tint); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 24px 0; }
+  .callout p:last-child { margin: 0; }
+
+  /* diagram */
+  .dg-box { fill: none; stroke: var(--diagram-line); stroke-width: 1.25; }
+  .dg-box.main { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 2; }
+  .dg-line { fill: none; stroke: var(--diagram-line); stroke-width: 1.25; }
+  .dg-head { fill: var(--diagram-line); }
+  .dg-name { fill: var(--text); font-weight: 600; font-size: 13px; }
+  .dg-sub { fill: var(--muted); font-size: 11.5px; }
+  .dg-label { fill: var(--muted); font-size: 11.5px; }
+  .dg-q { fill: var(--text); font-size: 13px; }
+  .dg-title { fill: var(--text); font-size: 15px; font-weight: 600; }
+  figure svg text { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; }
+
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<article>
+  <header class="post-head">
+    <p class="kicker">Document AI · Architecture</p>
+    <h1>Beyond the Context Window: Template-Guided, Section-Wise Extraction for Messy Vendor Documents</h1>
+    <p class="dek">How to split multi-document files, extract documents of any length, and check every result against the document itself.</p>
+    <p class="meta">November 9, 2026 · 14 min read</p>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#why-not">Why the whole PDF falls short</a></li>
+      <li><a href="#registry">Core idea: a format registry</a></li>
+      <li><a href="#step1">Step 1: Classify and split</a></li>
+      <li><a href="#step2">Step 2: Find and crop sections</a></li>
+      <li><a href="#step3">Step 3: Extract each section</a></li>
+      <li><a href="#step4">Step 4: Stitch and validate</a></li>
+      <li><a href="#unknown">Vendors with no template</a></li>
+      <li><a href="#pipeline">The whole pipeline</a></li>
+      <li><a href="#production">What to watch in production</a></li>
+      <li><a href="#tradeoffs">Trade-offs</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </nav>
+
+  <section>
+    <h2 id="problem">The problem: real vendor documents are messy</h2>
+    <p>When vendors send in documents, extraction gets hard because of three problems that show up together.</p>
+    <ol>
+      <li><strong>Every vendor uses its own layout.</strong> One invoice puts the invoice number top right, another puts it in a footer, and a third labels it "Bill Ref". Line-item tables have different columns, column orders and wrapping rules.</li>
+      <li><strong>One file can contain several documents.</strong> Accounts-payable inboxes often get one scanned PDF holding three invoices, a credit note and a delivery slip.</li>
+      <li><strong>Documents can be long.</strong> A utility or logistics invoice can run to 30 or 40 pages, almost all of it line items.</li>
+    </ol>
+    <p>A typical input looks like this: one 40-page PDF holding three invoices from two vendors. Two invoices are 2 pages each. The third is 36 pages, with a line-item table that starts on page 5 and doesn't end until page 39. Nothing in the file marks where one invoice stops and the next begins.</p>
+    <p>This post describes a pipeline that handles all three problems. It uses a supervised registry of known document formats to split files, find sections and extract each section separately. It also covers where that idea breaks and how to fix each weak spot.</p>
+  </section>
+
+  <section>
+    <h2 id="why-not">Why "just send the whole PDF to an LLM" falls short</h2>
+    <p>Current models can read very long PDFs, so the context window is no longer a hard wall. The real reasons to break documents up are accuracy, cost and control.</p>
+    <ul>
+      <li><strong>Accuracy drops on long inputs.</strong> Models skip or duplicate line items in long tables, mix up fields between documents in the same file, and get less reliable the further a value is from the start.</li>
+      <li><strong>Cost grows with every page.</strong> Each retry or correction reprocesses the whole document.</li>
+      <li><strong>Errors are hard to trace.</strong> If a total is wrong, you can't easily tell which page or region the bad value came from.</li>
+      <li><strong>Output limits still apply.</strong> A 1,500-row line-item table may not fit in one response even when the input fits.</li>
+    </ul>
+    <p>The fix is to give the model small, well-defined pieces of work: one document at a time, one section at a time, with a schema built for that section.</p>
+  </section>
+
+  <section>
+    <h2 id="registry">Core idea: a format registry</h2>
+    <p>The whole system rests on a registry of known document formats, built and checked by people. Each entry describes one vendor's layout for one document type: what it looks like, how its pages are arranged, and where each section sits.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Part of the entry</th><th>What it holds</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td>Fingerprint</td><td>Vendor tax ID, distinctive keywords, logo hash, text embedding of page 1</td><td>Recognising the format</td></tr>
+          <tr><td>Page roles</td><td>What a first page, continuation page and last page look like</td><td>Splitting files into documents</td></tr>
+          <tr><td>Section definitions</td><td>Header, line items, totals, remarks, each with its boundaries</td><td>Cropping sections</td></tr>
+          <tr><td>Field hints</td><td>Expected labels such as "Invoice No" or "Bill Ref", and expected formats</td><td>Guiding extraction</td></tr>
+          <tr><td>Validation rules</td><td>Which totals must add up, and which fields are required</td><td>Checking the output</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Define sections by anchors, not coordinates</h3>
+    <p>The obvious way to mark a section is a fixed box, for example "line items are from y=320 to y=780 on page 1". That breaks as soon as a header gets longer, an address wraps onto an extra line, or a table has more rows than the sample did.</p>
+    <p>Define each section relative to text the page always contains:</p>
+<pre><code>{
+  "section": "line_items",
+  "start_anchor": { "text": "Description", "edge": "top" },
+  "end_anchor": { "text": ["Subtotal", "Carried forward"], "edge": "top" },
+  "continues_across_pages": true,
+  "repeat_header_row": true
+}</code></pre>
+    <p>Anchors move with the content, so one template keeps working on a 1-page invoice and on a 36-page one.</p>
+  </section>
+
+  <section>
+    <h2 id="step1">Step 1: Classify pages and split the file</h2>
+    <p>Before extracting anything, split the file into separate documents. In the research literature this is called <em>page stream segmentation</em>: you label each page, then group the pages.</p>
+    <p>Give each page one of these labels:</p>
+    <ul>
+      <li><strong>First page:</strong> has a header block, a new invoice number, or "Page 1 of N".</li>
+      <li><strong>Continuation page:</strong> has the same invoice number, the line-item table carried over, or "Carried forward".</li>
+      <li><strong>Last page:</strong> has a totals block, payment terms or a signature area.</li>
+      <li><strong>Attachment:</strong> a delivery note, timesheet or cover letter that belongs with the document before it.</li>
+    </ul>
+    <p>The registry makes this much more reliable. Once the fingerprint identifies the vendor, its page-role definitions say exactly what a first page looks like for that vendor. For unknown formats, a cheap page-level classifier (a small vision model, or text rules) fills the gap.</p>
+    <p>Start a new document wherever the invoice number changes, the vendor changes, or a page is labelled "first page". Check each group before moving on: a page count that doesn't match "Page X of N", or a document with no totals block, means the split needs review.</p>
+  </section>
+
+  <section>
+    <h2 id="step2">Step 2: Find and crop sections</h2>
+    <p>For each document, use its template's anchors to find each section, then cut it into pieces the model can handle. The header is usually one piece. The line-item table is where most of the care goes.</p>
+
+    <h3>Tables that run across pages</h3>
+    <p>A 36-page table can't be one crop, and naive per-page crops cause three problems:</p>
+    <ul>
+      <li><strong>Rows split at page breaks.</strong> A description that wraps onto the next page ends up as half a row in each crop. Fix: overlap each chunk with the one before it by a row or two, then remove the duplicates when stitching.</li>
+      <li><strong>Column headers missing.</strong> Page 17 shows numbers with no column names. Fix: crop the header row once from the first page and attach it to the top of every chunk.</li>
+      <li><strong>Crops too large.</strong> One dense page can hold 60 rows. Fix: cap each chunk at a set number of rows, splitting at row boundaries found from table lines or whitespace.</li>
+    </ul>
+
+    <h3>Use the text layer when there is one</h3>
+    <p>Screenshots aren't always the best input. Many vendor PDFs are generated digitally and contain an exact text layer with coordinates.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>What to send for each section</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Digital PDF</td><td>Text and coordinates within the anchor region, plus the crop image as backup</td><td>Exact characters, cheaper, no OCR errors</td></tr>
+          <tr><td>Scanned PDF or image</td><td>Crop image, plus OCR text if available</td><td>Only option; the image keeps the layout</td></tr>
+          <tr><td>Mixed (stamps, handwriting)</td><td>Both</td><td>Text for typed fields, image for annotations</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Anchors also work best on the text layer: finding "Subtotal" in text is more reliable than finding it in pixels.</p>
+  </section>
+
+  <section>
+    <h2 id="step3">Step 3: Extract one section at a time</h2>
+    <p>Each section type gets its own prompt and output schema. That's where most of the accuracy gain comes from: the model answers one narrow question at a time.</p>
+    <ul>
+      <li><strong>Header:</strong> a fixed set of fields (vendor, invoice number, dates, PO number, currency, tax IDs), using the field hints from the template.</li>
+      <li><strong>Line items:</strong> an array of rows with fixed columns (description, quantity, unit price, tax, line total). Tell the model to return rows exactly as printed, without merging, summarising or calculating.</li>
+      <li><strong>Totals:</strong> subtotal, tax lines and grand total.</li>
+    </ul>
+
+    <h3>Pass the document's context into every call</h3>
+    <p>A crop of page 17 doesn't show the currency, the vendor or the PO number. Extract the header first, then include it in every line-item call:</p>
+<pre><code>Document context: Vendor = Acme Logistics, Currency = EUR, Invoice = INV-20931
+Columns (from page 5): Date | Shipment Ref | Description | Qty | Rate | Amount
+Chunk 7 of 22 (rows continue from previous chunk; first 2 rows overlap)
+Return rows exactly as printed.</code></pre>
+    <p>The extraction calls are independent of each other, so they can run in parallel. A 36-page invoice takes about as long as its slowest chunk, not the sum of all of them.</p>
+  </section>
+
+  <section>
+    <h2 id="step4">Step 4: Stitch and validate</h2>
+    <p>Smaller inputs make extraction more accurate, but they don't prove the output is right. Confidence comes from checking the stitched result against the document itself.</p>
+    <p><strong>Stitching.</strong> Join the chunks in order. Remove the overlapping rows by matching on row content and position, not on description alone, because real invoices repeat descriptions. Rejoin any row that was split at a page break.</p>
+    <p><strong>Checks.</strong> An invoice contains its own answer key:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Check</th><th>Rule</th><th>Catches</th></tr></thead>
+        <tbody>
+          <tr><td>Line arithmetic</td><td>quantity × unit price = line total</td><td>Misread digits, shifted columns</td></tr>
+          <tr><td>Table total</td><td>sum of line totals = subtotal</td><td>Missed or duplicated rows</td></tr>
+          <tr><td>Grand total</td><td>subtotal + tax − discounts = total</td><td>Missed tax lines or charges</td></tr>
+          <tr><td>Row count</td><td>Rows extracted match rows detected in the crop</td><td>Rows the model skipped</td></tr>
+          <tr><td>Cross-field</td><td>Due date after invoice date; tax ID matches registry; PO exists in your ERP</td><td>Wrong field, wrong document</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Routing.</strong> If every check passes, post the result automatically. If one fails, send only the affected section to a reviewer, showing its crop next to the extracted values. Because each value is tied to its crop, the reviewer checks one region instead of the whole 36-page document.</p>
+  </section>
+
+  <section>
+    <h2 id="unknown">Handling vendors with no template</h2>
+    <p>The biggest risk of a supervised registry is the labeling work. If every new vendor needs a person to mark up a template before its documents can be processed, the backlog grows faster than the team.</p>
+
+    <h3>A general fallback path</h3>
+    <p>When no fingerprint matches, the document goes through a path that needs no template:</p>
+    <ul>
+      <li>A layout model (for example a table-detection or document-layout model) finds the header, table and totals regions.</li>
+      <li>If that isn't confident, a vision LLM is asked to return the section boundaries as anchors.</li>
+      <li>Steps 2 to 4 then run as normal: cropping, extraction, stitching and checks are the same either way.</li>
+    </ul>
+
+    <h3>Templates that build themselves</h3>
+    <p>When a reviewer approves a result from the fallback path, the system already knows which anchors bounded each section and which labels matched each field. Save that as a <strong>draft template</strong>. After it passes on two or three more documents from the same vendor, promote it to active.</p>
+    <p>This turns the registry from something you build before going live into something that grows from normal use. People review results, which they would do anyway, instead of labeling templates.</p>
+
+    <h3>Spotting layout changes</h3>
+    <p>Vendors change their layouts without warning. Track the check failure rate for each template. If a template that usually passes 98% of the time drops sharply, mark it as stale. Its documents go to the fallback path, and the next approved result produces a new version of the template.</p>
+  </section>
+
+  <section>
+    <h2 id="pipeline">The whole pipeline</h2>
+    <figure>
+      <svg viewBox="0 0 760 512" role="img" aria-label="Both paths share the same checks, and approved reviews grow the registry">
+        <defs>
+          <marker id="pipe-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0L10 5L0 10z" class="dg-head"/>
+          </marker>
+        </defs>
+        <text class="dg-title" x="20" y="34">Both paths share the same checks, and approved reviews grow the registry</text>
+
+        <g class="dg-line">
+          <path d="M204 100H238" marker-end="url(#pipe-arrow)"/>
+          <path d="M422 100H488" marker-end="url(#pipe-arrow)"/>
+          <path d="M560 140V166H360V192" marker-end="url(#pipe-arrow)"/>
+          <path d="M560 166H620V192" marker-end="url(#pipe-arrow)"/>
+          <path d="M204 220H268" marker-end="url(#pipe-arrow)"/>
+          <path d="M360 248V276"/>
+          <path d="M620 248V276H220V312" marker-end="url(#pipe-arrow)"/>
+          <path d="M312 340H348" marker-end="url(#pipe-arrow)"/>
+          <path d="M532 340H568" marker-end="url(#pipe-arrow)"/>
+          <path d="M640 380V404H440V432" marker-end="url(#pipe-arrow)"/>
+          <path d="M640 404V432" marker-end="url(#pipe-arrow)"/>
+          <path d="M348 460H112V248" marker-end="url(#pipe-arrow)"/>
+        </g>
+
+        <!-- row 1 -->
+        <rect class="dg-box" x="20" y="72" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="112" y="96" text-anchor="middle">Ingest file</text>
+        <text class="dg-sub" x="112" y="114" text-anchor="middle">PDF, scan or email</text>
+
+        <rect class="dg-box" x="238" y="72" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="330" y="96" text-anchor="middle">Classify and split</text>
+        <text class="dg-sub" x="330" y="114" text-anchor="middle">page roles, one doc each</text>
+
+        <polygon class="dg-box" points="488,100 560,60 632,100 560,140"/>
+        <text class="dg-q" x="560" y="104" text-anchor="middle">Template match?</text>
+
+        <!-- row 2 -->
+        <rect class="dg-box main" x="20" y="192" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="112" y="216" text-anchor="middle">Format registry</text>
+        <text class="dg-sub" x="112" y="234" text-anchor="middle" style="fill:var(--text)">fingerprints, anchors</text>
+
+        <rect class="dg-box" x="268" y="192" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="360" y="216" text-anchor="middle">Template path</text>
+        <text class="dg-sub" x="360" y="234" text-anchor="middle">anchors from registry</text>
+
+        <rect class="dg-box" x="528" y="192" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="620" y="216" text-anchor="middle">General path</text>
+        <text class="dg-sub" x="620" y="234" text-anchor="middle">layout model or VLM</text>
+
+        <!-- row 3 -->
+        <rect class="dg-box" x="128" y="312" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="220" y="336" text-anchor="middle">Crop and chunk</text>
+        <text class="dg-sub" x="220" y="354" text-anchor="middle">header row + overlap</text>
+
+        <rect class="dg-box" x="348" y="312" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="440" y="336" text-anchor="middle">Extract per section</text>
+        <text class="dg-sub" x="440" y="354" text-anchor="middle">parallel, with context</text>
+
+        <polygon class="dg-box" points="568,340 640,300 712,340 640,380"/>
+        <text class="dg-q" x="640" y="344" text-anchor="middle">Checks pass?</text>
+
+        <!-- row 4 -->
+        <rect class="dg-box" x="348" y="432" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="440" y="456" text-anchor="middle">Human review</text>
+        <text class="dg-sub" x="440" y="474" text-anchor="middle">failed section only</text>
+
+        <rect class="dg-box" x="548" y="432" width="184" height="56" rx="8"/>
+        <text class="dg-name" x="640" y="456" text-anchor="middle">Post result</text>
+        <text class="dg-sub" x="640" y="474" text-anchor="middle">linked to source crops</text>
+
+        <!-- edge labels -->
+        <text class="dg-label" x="452" y="158" text-anchor="middle">yes</text>
+        <text class="dg-label" x="596" y="158" text-anchor="middle">no</text>
+        <text class="dg-label" x="236" y="210" text-anchor="middle">anchors</text>
+        <text class="dg-label" x="540" y="396" text-anchor="middle">fail</text>
+        <text class="dg-label" x="650" y="424">pass</text>
+        <text class="dg-label" x="230" y="452" text-anchor="middle">approved: draft template</text>
+      </svg>
+      <figcaption>Document pipeline: two extraction paths and one feedback loop.</figcaption>
+    </figure>
+    <p>The registry speeds up known formats, but every document passes the same checks. Reviewed results from the general path feed new templates back into the registry.</p>
+  </section>
+
+  <section>
+    <h2 id="production">What to watch in production</h2>
+    <p>The template registry looks like the core of this system, but in practice the core is splitting, validation and review. Templates are an optimisation on top. These are the places where real deployments struggle.</p>
+    <ol>
+      <li><strong>Splitting errors spread.</strong> If a file is split wrong, every later step works on the wrong unit. Scanned batches often lack "Page X of N", show the invoice number only on page 1, or include blank separator pages. Expect to spend more time on splitting than on extraction.</li>
+      <li><strong>Section crops can remove context.</strong> Current vision models handle a full page well, and a cropped header can lose nearby labels the model needs. Start with page-level chunks (one page, plus the column headers and the document context). Crop finer than a page only where you measure a gain.</li>
+      <li><strong>Anchors on scans need fuzzy matching.</strong> OCR turns "Subtotal" into "Subtota1" or "Sub total", and documents may be in other languages. Exact-match anchors fail without anyone noticing.</li>
+      <li><strong>Arithmetic checks need tolerances.</strong> Real invoices have rounding differences, tax per line versus tax on the total, several tax rates, freight, surcharges and discounts. Delivery notes have no totals at all, so their checks are weaker.</li>
+      <li><strong>Self-building templates need positions.</strong> To save a template, you need to know where each value was found on the page. LLMs report positions poorly. For digital PDFs, search the text layer for the extracted value; for scans, match it against OCR word boxes.</li>
+      <li><strong>Templates pay off only for high-volume vendors.</strong> Volume usually follows a Pareto pattern: roughly 20% of vendors produce 80% of documents. Build templates for that group and let the general path handle the rest.</li>
+    </ol>
+
+    <h3>A practical build order</h3>
+    <ol>
+      <li>Build the baseline: split, chunk by page with document context, extract with a strong vision model, validate, review.</li>
+      <li>Build a labelled test set of 200–500 real documents. Measure field-level accuracy and the straight-through rate (documents that need no human review).</li>
+      <li>Add templates for high-volume vendors whose baseline error rate justifies them.</li>
+      <li>Add section-level cropping only where page-level chunks measurably fail.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 id="tradeoffs">Trade-offs, and when not to use this</h2>
+    <p>This pipeline has more parts than a single prompt. It's worth it when volume, document length or accuracy requirements are high, and overkill otherwise.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Situation</th><th>Recommendation</th></tr></thead>
+        <tbody>
+          <tr><td>A few vendors, short one- or two-page documents, low volume</td><td>Whole-document LLM extraction plus the Step 4 checks is enough</td></tr>
+          <tr><td>Many vendors, long documents, files with several documents in them</td><td>This pipeline</td></tr>
+          <tr><td>Very high vendor turnover, every document looks new</td><td>Lean on the fallback path; the registry adds little</td></tr>
+          <tr><td>Strict audit requirements (finance, tax)</td><td>This pipeline: every value links back to its crop</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Costs to plan for: running the registry and fingerprint matching, tuning anchors for awkward layouts, and the review interface. Most of this is built once and then shared by every vendor.</p>
+  </section>
+
+  <section>
+    <h2 id="conclusion">Conclusion: treat templates as a learned cache</h2>
+    <p>Template-guided, section-by-section extraction solves all three original problems. The registry tells you what each document is and where it splits. Anchored sections let any page count go through fixed-size pieces of work. Checks against the document's own totals give you confidence you can measure.</p>
+    <div class="callout">
+      <p>Don't make templates a requirement. Make them a cache: use one when it exists, fall back to general layout detection when it doesn't, and let approved results build the next template. The system then improves with every document it processes, without a separate labeling project.</p>
+    </div>
+  </section>
+
+  <footer>
+    Thanks for reading. Questions or a different approach? I'd like to hear how you handle multi-document files and long line-item tables.
+  </footer>
+</article>
+</main>
+</body>
+</html>
