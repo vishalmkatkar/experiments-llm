@@ -61,15 +61,16 @@ Measured on an Apple M1 with 16 GB, where `qwen2.5:7b` generated about 5 tokens 
 
 | Mode | LLM calls | Time | Outcome |
 |---|---|---|---|
-| `--fast` | 4 (3 headers + 1 unknown vendor) | ~2 min | All 4 approved; 124/124 rows and 20/20 header fields match ground truth |
+| `--fast` | 4 (3 headers + 1 unknown vendor) | ~2.5 min | All 4 approved; 124/124 rows (every field, including dates and references) and 20/20 header fields match ground truth |
 | `--fast --drop-row INV-20958` | 4 | ~2 min | INV-20958 flagged `needs_review`: row count 71 vs 72, table total off by the missing amount |
-| default (all rows through the LLM) | see below | see below | see below |
+| default (every row through the LLM) | 14 (3 headers + 10 chunks + 1 unknown vendor) | ~32 min | All 4 approved; amounts, quantities, prices and descriptions correct on 124/124 rows; 20/20 header fields. That run also exposed the nullable-field problem below: the model left row dates and references empty. After the fix, a spot check returns them correctly; a full re-run is pending. |
 
-<!-- LLM-mode results are filled in from the latest full run. -->
+At 5 tokens per second, output tokens dominate: the 72-row invoice needed six chunk
+calls. On a faster machine or a hosted model the same run takes a few minutes.
 
 ## Things learned building it
 
-- **Small models answer `null` when the schema allows it.** With `po_number: str | None`, `qwen2.5:7b` returned null for PO numbers printed clearly in the header. Making optional fields plain strings ("empty string if absent") fixed it on both vendors.
+- **Small models answer `null` when the schema allows it.** With `po_number: str | None`, `qwen2.5:7b` returned null for PO numbers printed clearly in the header, and with nullable `date` and `reference` it dropped them from every line item. All the checks still passed, because none of them use those fields. Making the fields plain strings ("empty string if absent") fixed both. Validation only protects what it checks.
 - **Name the column order explicitly.** Given field names as "Columns", the model left `reference` empty on every Brightline row. Saying "after the row id, the cells are in this order: reference, description, ..." fixed it.
 - **Position ids make stitching safe.** INV-20958 has two genuinely identical rows. De-duplicating overlap rows by content would merge them; tagging each detected row with an id (`r041`, `r042`) before extraction keeps both.
 - **On a clean digital PDF, rules handle most rows.** When cells line up with the template's columns, parsing the text layer directly is exact and free. `--fast` sends only ragged rows to the LLM. Real-world files are messier, which is when the LLM path earns its cost.

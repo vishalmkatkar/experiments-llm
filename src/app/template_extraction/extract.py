@@ -20,8 +20,9 @@ class Header(BaseModel):
 
 
 _COLUMN_TYPES = {
-    "date": (str | None, None),
-    "reference": (str | None, None),
+    # Plain strings, not `str | None`: a nullable type makes small models drop printed values.
+    "date": (str, Field(description="The row's date exactly as printed")),
+    "reference": (str, Field(description="The row's reference or item code exactly as printed, e.g. SHP-1001 or BL-4100")),
     "description": (str, ...),
     "quantity": (float, ...),
     "unit_price": (float, ...),

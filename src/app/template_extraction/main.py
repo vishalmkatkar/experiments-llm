@@ -28,7 +28,10 @@ def _norm(v) -> str:
 
 
 def _row_key(r: dict) -> tuple:
-    return (_norm(r["description"]), round(r["quantity"], 4), round(r["unit_price"], 2), round(r["amount"], 2))
+    return (
+        _norm(r.get("date")), _norm(r.get("reference")), _norm(r["description"]),
+        round(r["quantity"], 4), round(r["unit_price"], 2), round(r["amount"], 2),
+    )
 
 
 def score(result: dict, truth: dict) -> str:
