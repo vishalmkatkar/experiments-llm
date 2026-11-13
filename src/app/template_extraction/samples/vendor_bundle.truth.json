@@ -1,0 +1,1066 @@
+[
+  {
+    "vendor": "Acme Logistics GmbH",
+    "invoice_number": "INV-20931",
+    "invoice_date": "2026-10-03",
+    "po_number": "PO-77812",
+    "currency": "EUR",
+    "vendor_tax_id": "DE811234567",
+    "rows": [
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-09-01",
+        "reference": "SHP-1001"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-09-02",
+        "reference": "SHP-1002"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-09-03",
+        "reference": "SHP-1003"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 420.0,
+        "amount": 420.0,
+        "date": "2026-09-04",
+        "reference": "SHP-1004"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-09-05",
+        "reference": "SHP-1005"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 75.0,
+        "amount": 75.0,
+        "date": "2026-09-06",
+        "reference": "SHP-1006"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 420.0,
+        "amount": 420.0,
+        "date": "2026-09-07",
+        "reference": "SHP-1007"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-09-08",
+        "reference": "SHP-1008"
+      },
+      {
+        "description": "Freight charge Bremen-Gdansk",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-09-09",
+        "reference": "SHP-1009"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-09-10",
+        "reference": "SHP-1010"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-09-11",
+        "reference": "SHP-1011"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-09-12",
+        "reference": "SHP-1012"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-09-13",
+        "reference": "SHP-1013"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 3,
+        "unit_price": 455.0,
+        "amount": 1365.0,
+        "date": "2026-09-14",
+        "reference": "SHP-1014"
+      },
+      {
+        "description": "Freight charge Bremen-Gdansk",
+        "quantity": 3,
+        "unit_price": 455.0,
+        "amount": 1365.0,
+        "date": "2026-09-15",
+        "reference": "SHP-1015"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 420.0,
+        "amount": 420.0,
+        "date": "2026-09-16",
+        "reference": "SHP-1016"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 3,
+        "unit_price": 455.0,
+        "amount": 1365.0,
+        "date": "2026-09-17",
+        "reference": "SHP-1017"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-09-18",
+        "reference": "SHP-1018"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 2,
+        "unit_price": 420.0,
+        "amount": 840.0,
+        "date": "2026-09-19",
+        "reference": "SHP-1019"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-09-20",
+        "reference": "SHP-1020"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-09-21",
+        "reference": "SHP-1021"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-09-22",
+        "reference": "SHP-1022"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 3,
+        "unit_price": 640.0,
+        "amount": 1920.0,
+        "date": "2026-09-23",
+        "reference": "SHP-1023"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-09-24",
+        "reference": "SHP-1024"
+      }
+    ],
+    "tax_rate": 0.19,
+    "subtotal": 14440.0,
+    "tax": 2743.6,
+    "total": 17183.6,
+    "pages": [
+      1,
+      2
+    ]
+  },
+  {
+    "vendor": "Brightline Office Supply Ltd",
+    "invoice_number": "BL-55120",
+    "invoice_date": "14 Oct 2026",
+    "po_number": "PO-77840",
+    "currency": "GBP",
+    "vendor_tax_id": "GB293447106",
+    "rows": [
+      {
+        "description": "Recycled notebooks A5, pack of 10",
+        "quantity": 1,
+        "unit_price": 15.2,
+        "amount": 15.2,
+        "date": null,
+        "reference": "BL-4100"
+      },
+      {
+        "description": "A4 copier paper, 80gsm, box of 5 reams",
+        "quantity": 4,
+        "unit_price": 24.99,
+        "amount": 99.96,
+        "date": null,
+        "reference": "BL-4101"
+      },
+      {
+        "description": "Recycled notebooks A5, pack of 10",
+        "quantity": 10,
+        "unit_price": 15.2,
+        "amount": 152.0,
+        "date": null,
+        "reference": "BL-4102"
+      },
+      {
+        "description": "Recycled notebooks A5, pack of 10",
+        "quantity": 6,
+        "unit_price": 15.2,
+        "amount": 91.2,
+        "date": null,
+        "reference": "BL-4103"
+      },
+      {
+        "description": "Ergonomic mesh office chair",
+        "quantity": 6,
+        "unit_price": 189.0,
+        "amount": 1134.0,
+        "date": null,
+        "reference": "BL-4104"
+      },
+      {
+        "description": "Recycled notebooks A5, pack of 10",
+        "quantity": 4,
+        "unit_price": 15.2,
+        "amount": 60.8,
+        "date": null,
+        "reference": "BL-4105"
+      },
+      {
+        "description": "A4 copier paper, 80gsm, box of 5 reams",
+        "quantity": 6,
+        "unit_price": 24.99,
+        "amount": 149.94,
+        "date": null,
+        "reference": "BL-4106"
+      },
+      {
+        "description": "Ergonomic mesh office chair",
+        "quantity": 2,
+        "unit_price": 189.0,
+        "amount": 378.0,
+        "date": null,
+        "reference": "BL-4107"
+      },
+      {
+        "description": "Laptop stand, aluminium",
+        "quantity": 1,
+        "unit_price": 34.5,
+        "amount": 34.5,
+        "date": null,
+        "reference": "BL-4108"
+      },
+      {
+        "description": "Whiteboard markers, assorted, pack of 12",
+        "quantity": 1,
+        "unit_price": 8.75,
+        "amount": 8.75,
+        "date": null,
+        "reference": "BL-4109"
+      },
+      {
+        "description": "Ballpoint pens, blue, pack of 50",
+        "quantity": 4,
+        "unit_price": 11.49,
+        "amount": 45.96,
+        "date": null,
+        "reference": "BL-4110"
+      },
+      {
+        "description": "Ballpoint pens, blue, pack of 50",
+        "quantity": 2,
+        "unit_price": 11.49,
+        "amount": 22.98,
+        "date": null,
+        "reference": "BL-4111"
+      },
+      {
+        "description": "Whiteboard markers, assorted, pack of 12",
+        "quantity": 6,
+        "unit_price": 8.75,
+        "amount": 52.5,
+        "date": null,
+        "reference": "BL-4112"
+      },
+      {
+        "description": "Desk lamp, LED, dimmable",
+        "quantity": 6,
+        "unit_price": 42.0,
+        "amount": 252.0,
+        "date": null,
+        "reference": "BL-4113"
+      },
+      {
+        "description": "A4 copier paper, 80gsm, box of 5 reams",
+        "quantity": 2,
+        "unit_price": 24.99,
+        "amount": 49.98,
+        "date": null,
+        "reference": "BL-4114"
+      },
+      {
+        "description": "Whiteboard markers, assorted, pack of 12",
+        "quantity": 6,
+        "unit_price": 8.75,
+        "amount": 52.5,
+        "date": null,
+        "reference": "BL-4115"
+      },
+      {
+        "description": "Laptop stand, aluminium",
+        "quantity": 4,
+        "unit_price": 34.5,
+        "amount": 138.0,
+        "date": null,
+        "reference": "BL-4116"
+      },
+      {
+        "description": "Ballpoint pens, blue, pack of 50",
+        "quantity": 6,
+        "unit_price": 11.49,
+        "amount": 68.94,
+        "date": null,
+        "reference": "BL-4117"
+      },
+      {
+        "description": "Desk lamp, LED, dimmable",
+        "quantity": 10,
+        "unit_price": 42.0,
+        "amount": 420.0,
+        "date": null,
+        "reference": "BL-4118"
+      },
+      {
+        "description": "Ergonomic mesh office chair",
+        "quantity": 6,
+        "unit_price": 189.0,
+        "amount": 1134.0,
+        "date": null,
+        "reference": "BL-4119"
+      },
+      {
+        "description": "Ergonomic mesh office chair",
+        "quantity": 6,
+        "unit_price": 189.0,
+        "amount": 1134.0,
+        "date": null,
+        "reference": "BL-4120"
+      },
+      {
+        "description": "Ballpoint pens, blue, pack of 50",
+        "quantity": 2,
+        "unit_price": 11.49,
+        "amount": 22.98,
+        "date": null,
+        "reference": "BL-4121"
+      }
+    ],
+    "tax_rate": 0.2,
+    "subtotal": 5518.19,
+    "tax": 1103.64,
+    "total": 6621.83,
+    "pages": [
+      3,
+      4
+    ]
+  },
+  {
+    "vendor": "Acme Logistics GmbH",
+    "invoice_number": "INV-20958",
+    "invoice_date": "2026-10-31",
+    "po_number": "PO-77901",
+    "currency": "EUR",
+    "vendor_tax_id": "DE811234567",
+    "rows": [
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 420.0,
+        "amount": 420.0,
+        "date": "2026-10-01",
+        "reference": "SHP-1100"
+      },
+      {
+        "description": "Freight charge Bremen-Gdansk",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-10-02",
+        "reference": "SHP-1101"
+      },
+      {
+        "description": "Freight charge Bremen-Gdansk",
+        "quantity": 3,
+        "unit_price": 640.0,
+        "amount": 1920.0,
+        "date": "2026-10-03",
+        "reference": "SHP-1102"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-04",
+        "reference": "SHP-1103"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-10-05",
+        "reference": "SHP-1104"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-06",
+        "reference": "SHP-1105"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-07",
+        "reference": "SHP-1106"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 3,
+        "unit_price": 510.0,
+        "amount": 1530.0,
+        "date": "2026-10-08",
+        "reference": "SHP-1107"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 3,
+        "unit_price": 510.0,
+        "amount": 1530.0,
+        "date": "2026-10-09",
+        "reference": "SHP-1108"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-10",
+        "reference": "SHP-1109"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-10-11",
+        "reference": "SHP-1110"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-10-12",
+        "reference": "SHP-1111"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-10-13",
+        "reference": "SHP-1112"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 2,
+        "unit_price": 455.0,
+        "amount": 910.0,
+        "date": "2026-10-14",
+        "reference": "SHP-1113"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-10-15",
+        "reference": "SHP-1114"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 62.0,
+        "amount": 124.0,
+        "date": "2026-10-16",
+        "reference": "SHP-1115"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 420.0,
+        "amount": 420.0,
+        "date": "2026-10-17",
+        "reference": "SHP-1116"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-18",
+        "reference": "SHP-1117"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-19",
+        "reference": "SHP-1118"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-10-20",
+        "reference": "SHP-1119"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 2,
+        "unit_price": 420.0,
+        "amount": 840.0,
+        "date": "2026-10-21",
+        "reference": "SHP-1120"
+      },
+      {
+        "description": "Customs documentation fee incl. port handling and terminal storage",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-10-22",
+        "reference": "SHP-1121"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-10-23",
+        "reference": "SHP-1122"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-10-24",
+        "reference": "SHP-1123"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 2,
+        "unit_price": 420.0,
+        "amount": 840.0,
+        "date": "2026-10-25",
+        "reference": "SHP-1124"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 48.5,
+        "amount": 48.5,
+        "date": "2026-10-26",
+        "reference": "SHP-1125"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 48.5,
+        "amount": 48.5,
+        "date": "2026-10-27",
+        "reference": "SHP-1126"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 2,
+        "unit_price": 380.0,
+        "amount": 760.0,
+        "date": "2026-10-28",
+        "reference": "SHP-1127"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-01",
+        "reference": "SHP-1128"
+      },
+      {
+        "description": "Freight charge Bremen-Gdansk",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-10-02",
+        "reference": "SHP-1129"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 2,
+        "unit_price": 455.0,
+        "amount": 910.0,
+        "date": "2026-10-03",
+        "reference": "SHP-1130"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-04",
+        "reference": "SHP-1131"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 3,
+        "unit_price": 640.0,
+        "amount": 1920.0,
+        "date": "2026-10-05",
+        "reference": "SHP-1132"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-10-06",
+        "reference": "SHP-1133"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-10-07",
+        "reference": "SHP-1134"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-08",
+        "reference": "SHP-1135"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-09",
+        "reference": "SHP-1136"
+      },
+      {
+        "description": "Freight charge Bremen-Gdansk",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-10",
+        "reference": "SHP-1137"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 3,
+        "unit_price": 510.0,
+        "amount": 1530.0,
+        "date": "2026-10-11",
+        "reference": "SHP-1138"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-12",
+        "reference": "SHP-1139"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-12",
+        "reference": "SHP-1140"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-12",
+        "reference": "SHP-1140"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-10-15",
+        "reference": "SHP-1142"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 75.0,
+        "amount": 75.0,
+        "date": "2026-10-16",
+        "reference": "SHP-1143"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-10-17",
+        "reference": "SHP-1144"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-18",
+        "reference": "SHP-1145"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 48.5,
+        "amount": 48.5,
+        "date": "2026-10-19",
+        "reference": "SHP-1146"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 2,
+        "unit_price": 640.0,
+        "amount": 1280.0,
+        "date": "2026-10-20",
+        "reference": "SHP-1147"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-21",
+        "reference": "SHP-1148"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 3,
+        "unit_price": 420.0,
+        "amount": 1260.0,
+        "date": "2026-10-22",
+        "reference": "SHP-1149"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 62.0,
+        "amount": 124.0,
+        "date": "2026-10-23",
+        "reference": "SHP-1150"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-24",
+        "reference": "SHP-1151"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-10-25",
+        "reference": "SHP-1152"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-10-26",
+        "reference": "SHP-1153"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 3,
+        "unit_price": 420.0,
+        "amount": 1260.0,
+        "date": "2026-10-27",
+        "reference": "SHP-1154"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 420.0,
+        "amount": 420.0,
+        "date": "2026-10-28",
+        "reference": "SHP-1155"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 640.0,
+        "amount": 640.0,
+        "date": "2026-10-01",
+        "reference": "SHP-1156"
+      },
+      {
+        "description": "Freight charge Kiel-Gothenburg",
+        "quantity": 3,
+        "unit_price": 380.0,
+        "amount": 1140.0,
+        "date": "2026-10-02",
+        "reference": "SHP-1157"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-10-03",
+        "reference": "SHP-1158"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-04",
+        "reference": "SHP-1159"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 380.0,
+        "amount": 380.0,
+        "date": "2026-10-05",
+        "reference": "SHP-1160"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 455.0,
+        "amount": 455.0,
+        "date": "2026-10-06",
+        "reference": "SHP-1161"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 3,
+        "unit_price": 640.0,
+        "amount": 1920.0,
+        "date": "2026-10-07",
+        "reference": "SHP-1162"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-08",
+        "reference": "SHP-1163"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 75.0,
+        "amount": 150.0,
+        "date": "2026-10-09",
+        "reference": "SHP-1164"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 62.0,
+        "amount": 62.0,
+        "date": "2026-10-10",
+        "reference": "SHP-1165"
+      },
+      {
+        "description": "Freight charge Hamburg-Felixstowe",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-11",
+        "reference": "SHP-1166"
+      },
+      {
+        "description": "Freight charge Hamburg-Rotterdam",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-12",
+        "reference": "SHP-1167"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 2,
+        "unit_price": 380.0,
+        "amount": 760.0,
+        "date": "2026-10-13",
+        "reference": "SHP-1168"
+      },
+      {
+        "description": "Customs documentation fee",
+        "quantity": 2,
+        "unit_price": 48.5,
+        "amount": 97.0,
+        "date": "2026-10-14",
+        "reference": "SHP-1169"
+      },
+      {
+        "description": "Freight charge Hamburg-Antwerp",
+        "quantity": 1,
+        "unit_price": 510.0,
+        "amount": 510.0,
+        "date": "2026-10-15",
+        "reference": "SHP-1170"
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "date": "2026-10-16",
+        "reference": "SHP-1171"
+      }
+    ],
+    "tax_rate": 0.19,
+    "subtotal": 35242.5,
+    "tax": 6696.07,
+    "total": 41938.57,
+    "pages": [
+      5,
+      6,
+      7
+    ]
+  },
+  {
+    "vendor": "Cobalt Freight Inc.",
+    "invoice_number": "CF-3381",
+    "invoice_date": "10/21/2026",
+    "po_number": "PO-77866",
+    "currency": "USD",
+    "vendor_tax_id": "94-3318820",
+    "rows": [
+      {
+        "description": "Drayage Oakland port to warehouse",
+        "quantity": 3,
+        "unit_price": 285.0,
+        "amount": 855.0,
+        "date": null,
+        "reference": null
+      },
+      {
+        "description": "Chassis rental (per day)",
+        "quantity": 6,
+        "unit_price": 42.0,
+        "amount": 252.0,
+        "date": null,
+        "reference": null
+      },
+      {
+        "description": "Pre-pull and yard storage",
+        "quantity": 2,
+        "unit_price": 95.0,
+        "amount": 190.0,
+        "date": null,
+        "reference": null
+      },
+      {
+        "description": "Fuel surcharge",
+        "quantity": 3,
+        "unit_price": 31.5,
+        "amount": 94.5,
+        "date": null,
+        "reference": null
+      },
+      {
+        "description": "Container inspection",
+        "quantity": 1,
+        "unit_price": 160.0,
+        "amount": 160.0,
+        "date": null,
+        "reference": null
+      },
+      {
+        "description": "Waiting time (per hour)",
+        "quantity": 2,
+        "unit_price": 85.0,
+        "amount": 170.0,
+        "date": null,
+        "reference": null
+      }
+    ],
+    "tax_rate": 0.085,
+    "subtotal": 1721.5,
+    "tax": 146.33,
+    "total": 1867.83,
+    "pages": [
+      8
+    ]
+  }
+]

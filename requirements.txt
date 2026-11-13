@@ -1,0 +1,13 @@
+# Runtime dependencies for the examples in src/app/.
+# Both examples also need a local Ollama server: https://ollama.com
+#   ollama pull qwen2.5:7b          (both examples)
+#   ollama pull nomic-embed-text    (self_correcting_rag)
+
+langgraph==1.2.20
+langchain-core==1.7.6
+langchain-ollama==1.1.0
+pydantic==2.14.3
+
+# template_extraction only
+pdfplumber==0.11.10
+reportlab==5.1.0

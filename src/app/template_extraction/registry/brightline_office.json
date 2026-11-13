@@ -1,0 +1,43 @@
+{
+  "id": "brightline_office",
+  "vendor": "Brightline Office Supply Ltd",
+  "document_type": "invoice",
+  "currency": "GBP",
+  "fingerprint": {
+    "tax_ids": ["GB293447106"],
+    "keywords": ["Brightline Office Supply"]
+  },
+  "document_id": { "pattern": "BL-\\d{5}" },
+  "page_counter": "Sheet (\\d+)/(\\d+)",
+  "page_roles": {
+    "first": { "contains": ["Bill Ref:"] },
+    "continuation": { "contains": ["- continued"] },
+    "last": { "contains": ["Amount payable"] }
+  },
+  "sections": {
+    "header": {
+      "description": "Everything on the first page above the line-item header row."
+    },
+    "line_items": {
+      "header_row_contains": ["Item", "Description", "Line Total"],
+      "end_anchors": ["Continued on next sheet", "Net total"],
+      "skip_lines": [],
+      "continues_across_pages": true,
+      "repeat_header_row": true,
+      "columns": ["reference", "description", "quantity", "unit_price", "amount"]
+    },
+    "totals": {
+      "fields": { "subtotal": "Net total", "tax": "VAT (20%)", "total": "Amount payable" }
+    }
+  },
+  "field_hints": {
+    "invoice_number": "labelled 'Bill Ref:', format BL-12345",
+    "invoice_date": "labelled 'Date of issue:', format like 14 Oct 2026",
+    "po_number": "labelled 'Your order:'",
+    "currency": "stated as 'All amounts in <currency>'",
+    "vendor_tax_id": "after 'VAT' on the company line"
+  },
+  "validation": {
+    "required": ["invoice_number", "invoice_date", "total"]
+  }
+}

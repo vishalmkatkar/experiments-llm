@@ -1,0 +1,43 @@
+{
+  "id": "acme_logistics",
+  "vendor": "Acme Logistics GmbH",
+  "document_type": "invoice",
+  "currency": "EUR",
+  "fingerprint": {
+    "tax_ids": ["DE811234567"],
+    "keywords": ["ACME LOGISTICS", "Acme Logistics GmbH"]
+  },
+  "document_id": { "pattern": "INV-\\d{5}" },
+  "page_counter": "Page (\\d+) of (\\d+)",
+  "page_roles": {
+    "first": { "contains": ["Invoice No:"] },
+    "continuation": { "contains": ["(continued)"] },
+    "last": { "contains": ["Total due"] }
+  },
+  "sections": {
+    "header": {
+      "description": "Everything on the first page above the line-item header row."
+    },
+    "line_items": {
+      "header_row_contains": ["Shipment Ref", "Description", "Amount"],
+      "end_anchors": ["Carried forward", "Subtotal"],
+      "skip_lines": ["Brought forward"],
+      "continues_across_pages": true,
+      "repeat_header_row": true,
+      "columns": ["date", "reference", "description", "quantity", "unit_price", "amount"]
+    },
+    "totals": {
+      "fields": { "subtotal": "Subtotal", "tax": "VAT 19%", "total": "Total due" }
+    }
+  },
+  "field_hints": {
+    "invoice_number": "labelled 'Invoice No:', format INV-12345",
+    "invoice_date": "labelled 'Invoice Date:', ISO format YYYY-MM-DD",
+    "po_number": "labelled 'PO Number:'",
+    "currency": "labelled 'Currency:'",
+    "vendor_tax_id": "labelled 'VAT ID:'"
+  },
+  "validation": {
+    "required": ["invoice_number", "invoice_date", "total"]
+  }
+}

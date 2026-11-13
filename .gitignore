@@ -50,3 +50,6 @@ Thumbs.db
 
 # --- Logs --------------------------------------------------------------------
 *.log
+
+# --- Runtime output from the examples -------------------------------------------
+src/app/template_extraction/out/
